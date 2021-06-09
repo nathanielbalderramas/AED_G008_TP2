@@ -3,28 +3,30 @@ Este repositorio incluye la resolución del segundo trabajo práctico de la mate
 
 # TODO:
 ## Funciones
-  check_acierto
-  check_acierto_critico
-  solicitar_apuesta
-  print_resultados_parciales
-  porcentaje()
-  promedio()
+    solicitar_apuesta
+    check_acierto_critico
+    calcular_porcentaje
+    calcular_promedio
+    print_resultados_parciales
+    print_resultados_finales ¿?
   
 ## Interfaz
-básicamente toda la brillantina.
-Agreguen acá cosas que les gustaría para ver si después las podemos agregar ;)
+    Básicamente toda la brillantina.
+    Mensaje de "ultima jugada"
+    Docstrings con el criterio de los profes/PEP
+    Agreguen acá cosas que les gustaría para ver si después las podemos agregar ;)
 
 ## Estadísticas
-    ganador: int
-    ganador_mayores_aciertos: bool
-    puntaje_promedio_1: float
-    puntaje_promedio_2: float
-    porcentaje_aciertos_1: float
-    porcentaje_aciertos_2: float
+    ganador: int [DONE]
+    ganador_mayores_aciertos: bool [DONE]
+    puntaje_promedio_1: float [DONE]
+    puntaje_promedio_2: float [DONE]
+    porcentaje_aciertos_1: float [DONE]
+    porcentaje_aciertos_2: float [DONE]
+    jugadas_empatadas: bool [DONE]
+    tres_al_hilo: bool [DONE]
     
 ## Otros
-Considerando el item "e" de la planilla de calificación...
-¿Les parece intentar hacer una función "turno" o "jugada" que englobe el proceso de apostar y tirar los dados? (viendo lo que dice la planilla de calificación)
-¿Que entradas y salidas tendría esta función para que podamos aplicarla a ambos jugadores y nos permita realizar las estadísticas necesarias?
-
-  
+    Pasar todas las funciones a un archivo aparte
+    Testear todas las funciones [puede llevar mucho tiempo]
+    Testear el programa entero
