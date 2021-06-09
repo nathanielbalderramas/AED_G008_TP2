@@ -40,15 +40,6 @@ Por último, se pide elaborar y mostrar las siguientes estadísticas:
 """
 import random
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# Yo diagramé esto en mi cabeza así nomás       !!!!!
-# pero si no se quieren hacer spoilers          !!!!!
-# de como resolver el problema                  !!!!!
-# entonces no sigan leyendo >:[                 !!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 # Entradas:
 puntaje_objetivo: int
@@ -131,39 +122,62 @@ def check_acierto_critico(dados, apuesta):
     """Entrada: (int, int, int), bool | Salida: bool"""
     pass
 
-# Salidas:
+
+def jugada(nombre):
+    """Entrada: str | Salida: (int, bool)"""
+    print("Turno de {}\nExitos!\n".format(nombre))
+    apuesta = solicitar_apuesta()
+    dados = tirar_dados()
+    print("Tus dados son: {}, {}, {}".format(*dados))
+    acierto = check_acierto(dados, apuesta)
+    puntaje = calcular_puntaje(dados, apuesta)
+    msj = "Tu puntaje para esta jugada es de: {}\n".format(puntaje)
+
+    # Brillantina Emocional
+    if puntaje < -8:
+        msj += "¿Has considerado dedicarte a otra cosa? :/"
+    elif puntaje < 0:
+        msj += "Que mal :c"
+    elif puntaje < 8:
+        msj += "Nada mal :)"
+    else:
+        puntaje += "¡Maravillosa jugada! O_O"
+    print(msj)
+    return puntaje, acierto
 
 
+def calcular_promedio(acumulador, contador):
+    """Entradas: int, int | Salidas: float"""
+    pass
 
-# Proceso:
 
-# ciclo del programa (opcion != 0)
-# -- ingresar: nombre_jugador_1, nombre_jugador_2, puntaje_objetivo
-# -- inicializar: contadores, acumuladores y banderas
-# -- ciclo del juego (puntaje_total_1 < puntaje_objetivo and puntaje_total_2 < puntaje_objetivo)
-# -- -- ingresar apuesta 1
-# -- -- roll jugador 1
-# -- -- proceso de calculo 1 (contadores y acumuladores)
-# -- -- ingresar apuesta 2
-# -- -- roll jugador 2
-# -- -- proceso de calculo 2 (contadores y acumuladores)
-# -- -- proceso de calculo jugada (contadores, acumuladores y banderas)
-# -- -- informe puntaje parcial
-# -- proceso de calculo final
-# -- salida por pantalla de resultados
+def calcular_porcentaje(x, total):
+    """Entradas: int, int | Salidas: float"""
+    # Recomendaría que el float sea redondeado a 1
+    pass
 
 opcion = None
 while opcion.lower() != "x":
     print("Bienvenido! Presione \"enter\" para jugar. Ingrese X para salir")
     opcion = input()
     #Inicia el juego, solicita nombres y puntaje objetivo
-    while nombre_jugador_1 == nombre_jugador_2:
+    while nombre_jugador_a == nombre_jugador_b:
         "A continuación, se les solicitara sus nombres"
-        nombre_jugador_1 = solicitar_nombre()
-        nombre_jugador_2 = solicitar_nombre()
-        if nombre_jugador_1 == nombre_jugador_2:
+        nombre_jugador_a = solicitar_nombre()
+        nombre_jugador_b = solicitar_nombre()
+        if nombre_jugador_a == nombre_jugador_b:
             print("Advertencia: Si ud se llama igual que su rival, puede dirigirse al Registro Civil mas cercano para cambiarse el nombre, o directamente ingresar aquí un nombre diferente")
-    solicitar_puntaje_objetivo()
+    puntaje_objetivo = solicitar_puntaje_objetivo()
+
+    # Sorteo primer jugador
+    print("Ahora vamos a sortear quien empieza...")
+    print("... ♫ redoble de tambores ♫ ...")
+    nombres = (nombre_jugador_a, nombre_jugador_b)
+    nombre_jugador_1 = random.choice(nombres)
+    nombres.remove(nombre_jugador_1)
+    nombre_jugador_2 = nombres[0]
+    print("¡Comienza {}!".format(nombre_jugador_1))
+
 
     #Inicializar contadores, acumuladores y banderas
     jugadas_totales: int = 0
@@ -185,20 +199,32 @@ while opcion.lower() != "x":
 
     while (puntaje_total_1 < puntaje_objetivo and puntaje_total_2 < puntaje_objetivo):
         ganador_jugada_anterior = ganador_jugada_actual # ver si dejar acá o al fondo. Es lo mismo
+
         # Turno jugador 1
-        apuesta_jugador_1 = solicitar_apuesta()
-        dados_jugador_1 = tirar_dados()
-        puntaje_total_1 += calcular_puntaje(dados_jugador_1)
-        if check_acierto(dados_jugador_1, apuesta_jugador_1):
+        puntaje_jugada_1, acierto_jugada_1 = jugada(nombre_jugador_1)
+        puntaje_total_1 += puntaje_jugada_1
+        if acierto_jugada_1:
             aciertos_1 += 1
 
         # Turno jugador 2
-        # Copiar de turno jugador 1
+        puntaje_jugada_2, acierto_jugada_2 = jugada(nombre_jugador_2)
+        puntaje_total_2 += puntaje_jugada_2
+        if acierto_jugada_2:
+            aciertos_2 += 1
 
         # Proceso general
-        # calcular ganador_jugada_actual
-        # actualizar jugadas_ganadas_1 y jugadas_ganadas_2
-        # actualizar jugadas_empatadas
+
+        # calcular ganador_jugada_actual, actualizar jugadas_ganadas_1, jugadas_ganadas_2 y jugadas_empatadas
+        if puntaje_jugada_1 > puntaje_jugada_2:
+            jugadas_ganadas_1 += 1
+            print("En esta ronda la victoria es de {}!".format(nombre_jugador_1))
+        elif puntaje_jugada_2 > puntaje_jugada_1:
+            jugadas_ganadas_2 += 1
+            print("En esta ronda la victoria es de {}!".format(nombre_jugador_2))
+        else:
+            jugadas_empatadas = True
+            print("El resultado de la ronda es un empate!")
+
         # actualizar tres_al_hilo ¿hacer función para esto?
         if ganador_jugada_actual == ganador_jugada_anterior:
             victorias_seguidas += 1
@@ -209,7 +235,6 @@ while opcion.lower() != "x":
 
         jugadas_totales += 1
 
-
         print_resultados_parciales(nombre_jugador_1,
                                    nombre_jugador_2,
                                    puntaje_total_1,
@@ -217,16 +242,37 @@ while opcion.lower() != "x":
                                    jugadas_totales)
 
     # Proceso general
+    print("\n...Fin de la partida...")
     # Calcular ganador total -> encontrar_ganador(puntaje1_total_1, puntaje_total_2, jugadas_ganadas_1, jugadas_ganadas_2)
-    # calcular porcentajes y promedios -> calcular_porcentaje(cantidad_1, cantidad_total)
+    if puntaje_total_1 > puntaje_total_2:
+        ganador = 1
+    elif puntaje_total_1 < puntaje_total_2:
+        ganador = 2
+    else:
+        if jugadas_ganadas_1 > jugadas_ganadas_2:
+            ganador = 1
+        elif jugadas_ganadas_1 < jugadas_ganadas_2:
+            ganador = 2
+        else:
+            ganador = 0
+
     # revisar ganador mayor porcentaje de aciertos
+    ganador_mayores_aciertos = False
+    if ganador == 1:
+        if porcentaje_aciertos_1 > porcentaje_aciertos_2:
+            ganador_mayores_aciertos = True
+    elif ganador == 2:
+        if porcentaje_aciertos_2 > porcentaje_aciertos_1:
+            ganador_mayores_aciertos = True
+
+    # calcular porcentajes y promedios -> calcular_porcentaje(cantidad_1, cantidad_total)
+    puntaje_promedio_1 = calcular_promedio(puntaje_total_1, jugadas_totales)
+    porcentaje_aciertos_1 = calcular_porcentaje(aciertos_1, jugadas_totales)
+    puntaje_promedio_2 = calcular_promedio(puntaje_total_2, jugadas_totales)
+    porcentaje_aciertos_2 = calcular_porcentaje(aciertos_2, jugadas_totales)
+
     # Imprimir resultados y estadisticas: de todo!
-    ganador: int
-    ganador_mayores_aciertos: bool
-    puntaje_promedio_1: float
-    puntaje_promedio_2: float
-    porcentaje_aciertos_1: float
-    porcentaje_aciertos_2: float
+    # Considerar crear la función print_resultados_finales()
 
 
 
