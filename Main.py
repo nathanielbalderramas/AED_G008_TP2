@@ -156,6 +156,32 @@ def calcular_porcentaje(x, total):
     # Recomendaría que el float sea redondeado a 1
     pass
 
+def encontrar_ganador(puntaje_1, puntaje_2, victorias_1, victorias_2):
+    # Determinación del ganador
+    if puntaje_1 > puntaje_2:
+        ganador = 1
+    elif puntaje_1 < puntaje_2:
+        ganador = 2
+    else:
+        if victorias_1 > victorias_2:
+            ganador = 1
+        elif victorias_1 < victorias_2:
+            ganador = 2
+        else:
+            ganador = 0
+
+    # revisar si el ganador  tiene mayor porcentaje de aciertos
+    ganador_mayores_aciertos = False
+    if ganador == 1:
+        if victorias_1 > victorias_2:
+            ganador_mayores_aciertos = True
+    elif ganador == 2:
+        if victorias_1 < victorias_2:
+            ganador_mayores_aciertos = True
+
+    return ganador, ganador_mayores_aciertos
+
+
 opcion = None
 while opcion.lower() != "x":
     print("Bienvenido! Presione \"enter\" para jugar. Ingrese X para salir")
@@ -172,7 +198,7 @@ while opcion.lower() != "x":
     # Sorteo primer jugador
     print("Ahora vamos a sortear quien empieza...")
     print("... ♫ redoble de tambores ♫ ...")
-    nombres = (nombre_jugador_a, nombre_jugador_b)
+    nombres = [nombre_jugador_a, nombre_jugador_b]
     nombre_jugador_1 = random.choice(nombres)
     nombres.remove(nombre_jugador_1)
     nombre_jugador_2 = nombres[0]
@@ -235,46 +261,38 @@ while opcion.lower() != "x":
 
         jugadas_totales += 1
 
-        print_resultados_parciales(nombre_jugador_1,
-                                   nombre_jugador_2,
-                                   puntaje_total_1,
-                                   puntaje_total_2,
+        print_resultados_parciales(nombre_jugador_1, nombre_jugador_2,
+                                   puntaje_total_1, puntaje_total_2,
                                    jugadas_totales)
 
     # Proceso general
     print("\n...Fin de la partida...")
-    # Calcular ganador total -> encontrar_ganador(puntaje1_total_1, puntaje_total_2, jugadas_ganadas_1, jugadas_ganadas_2)
-    if puntaje_total_1 > puntaje_total_2:
-        ganador = 1
-    elif puntaje_total_1 < puntaje_total_2:
-        ganador = 2
-    else:
-        if jugadas_ganadas_1 > jugadas_ganadas_2:
-            ganador = 1
-        elif jugadas_ganadas_1 < jugadas_ganadas_2:
-            ganador = 2
-        else:
-            ganador = 0
 
-    # revisar ganador mayor porcentaje de aciertos
-    ganador_mayores_aciertos = False
-    if ganador == 1:
-        if porcentaje_aciertos_1 > porcentaje_aciertos_2:
-            ganador_mayores_aciertos = True
-    elif ganador == 2:
-        if porcentaje_aciertos_2 > porcentaje_aciertos_1:
-            ganador_mayores_aciertos = True
+    # Calcular ganador total
+    ganador, ganador_mayor_aciertos = encontrar_ganador(puntaje_total_1, puntaje_total_2,
+                                                        jugadas_ganadas_1, jugadas_ganadas_2)
 
-    # calcular porcentajes y promedios -> calcular_porcentaje(cantidad_1, cantidad_total)
+    # calcular porcentajes y promedios -> calcular_porcentaje(cantidad_1, cantidad_t    otal)
     puntaje_promedio_1 = calcular_promedio(puntaje_total_1, jugadas_totales)
     porcentaje_aciertos_1 = calcular_porcentaje(aciertos_1, jugadas_totales)
     puntaje_promedio_2 = calcular_promedio(puntaje_total_2, jugadas_totales)
     porcentaje_aciertos_2 = calcular_porcentaje(aciertos_2, jugadas_totales)
 
     # Imprimir resultados y estadisticas: de todo!
+    # LO DEJO A MANO:
+    """
+    La cantidad de jugadas realizadas (recordando que una jugada consiste en los turnos de ambos jugadores).
+    Si hubo al menos una jugada con puntaje empatado entre ambos jugadores.
+    El puntaje promedio obtenido por jugada por cada jugador.
+    El porcentaje de aciertos para cada jugador
+    (considerando acierto si la suma de los dados coincidió con la apuesta apostada).
+    Indicar también si el ganador es el que tuvo mayor porcentaje de aciertos.
+    Si algún jugador ganó en al menos 3 turnos seguidos.
+
+    """
     # Considerar crear la función print_resultados_finales()
 
 
-
+# Mensaje de salida
 print("Gracias por jugar! Nos vemos!")
 
