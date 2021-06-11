@@ -32,5 +32,3 @@ def cargar_entero_con_tope_minimo(tope_minimo, mensaje=None):
         print("El valor ingresado no es válido")
         x = int(input("Ingrese un número mayor a " + str(tope_minimo) + ": "))
     return x
-
-# prueba = cargar_entero_con_tope_minimo(10, "Para continuar deberá ingresar el puntaje máximo necesario para que la partida finalice.")
