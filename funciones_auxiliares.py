@@ -125,7 +125,7 @@ def jugada(nombre):
     elif puntaje < 8:
         msj += "Nada mal :)"
     else:
-        puntaje += "¡Maravillosa jugada! O_O"
+        msj += "¡Maravillosa jugada! O_O"
     print(msj+"\n")
     return puntaje, acierto
 
@@ -167,4 +167,50 @@ def encontrar_ganador(puntaje_1, puntaje_2, victorias_1, victorias_2):
             ganador_mayores_aciertos = True
 
     return ganador, ganador_mayores_aciertos
+
+
+def print_resultados_finales(ganador, ganador_mayor_aciertos, nombre_jugador_1, nombre_jugador_2,
+                             jugadas_totales, jugadas_empatadas, tres_al_hilo,
+                             puntaje_promedio_1, puntaje_promedio_2, porcentaje_aciertos_1, porcentaje_aciertos_2):
+    # Traducir banderas a string
+    if jugadas_empatadas:
+        jugadas_empatadas = "SI"
+    else:
+        jugadas_empatadas = "NO"
+
+    if tres_al_hilo:
+        tres_al_hilo = "SI"
+    else:
+        jugadas_empatadas = "NO"
+
+    # Imprimir resultados y estadisticas: de todo!
+    print("\n" + "=" * 60)
+    print("FIN DE LA PARTIDA".center(60))
+    print("=" * 60 + "\n")
+
+    if ganador == 0:
+        print("El juego ha concluído en un empate ¯\\_(ツ)_/¯ \n¡Eso no pasa todos los días!")
+    elif ganador == 1:
+        print("El juego ha concluído con una victoria para {}!".format(nombre_jugador_1))
+    elif ganador == 2:
+        print("El juego ha concluído con una victoria para {}!".format(nombre_jugador_2))
+    else:
+        print("WTF just happened?")  # DEBUG
+
+    if ganador != 0:
+        print("¡¡FELICIDADES!!")
+    if ganador_mayor_aciertos:
+        print("El ganador del juego fue también quien obtuvo la mayor cantidad de aciertos en sus apuestas!")
+
+    print("\n" + "-" * 60)
+    print("Estadísticas de la partida".center(60))
+    print("-" * 60)
+    print("Jugadas totales: {}".format(jugadas_totales))
+    print("Puntaje Promedio de {}: {}".format(nombre_jugador_1, puntaje_promedio_1))
+    print("Puntaje Promedio de {}: {}".format(nombre_jugador_2, puntaje_promedio_2))
+    print("Porcentaje de Aciertos de {}: {}%".format(nombre_jugador_1, porcentaje_aciertos_1))
+    print("Porcentaje de Aciertos de {}: {}%".format(nombre_jugador_2, porcentaje_aciertos_2))
+    print("Jugadas empatadas: {}".format(jugadas_empatadas))
+    print("Tres Al Hilo: {}".format(tres_al_hilo))
+    print("-" * 60 + "\n")
 

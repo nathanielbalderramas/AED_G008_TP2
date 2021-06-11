@@ -71,7 +71,7 @@ apuesta_jugador_2: int  # o bool?
 print("Bienvenido! Presione \"enter\" para jugar. Ingrese X para salir")
 opcion = input()
 while opcion.lower() != "x":
-    #Inicia el juego, solicita nombres y puntaje objetivo
+    # Inicia el juego, solicita nombres y puntaje objetivo
     nombre_jugador_a, nombre_jugador_b = None, None
     while nombre_jugador_a == nombre_jugador_b:
         "A continuación, se les solicitara sus nombres"
@@ -79,7 +79,9 @@ while opcion.lower() != "x":
         nombre_jugador_a = solicitar_nombre("Primer Jugador")
         nombre_jugador_b = solicitar_nombre("Segundo Jugador")
         if nombre_jugador_a == nombre_jugador_b:
-            print("Advertencia: Si ud se llama igual que su rival, puede dirigirse al Registro Civil mas cercano para cambiarse el nombre, o directamente ingresar aquí un nombre diferente")
+            warning = "Advertencia: Si ud se llama igual que su rival, puede dirigirse al Registro Civil mas cercano"
+            warning += " para cambiarse el nombre, o directamente ingresar aquí un nombre diferente"
+            print(warning)
     puntaje_objetivo = solicitar_puntaje_objetivo()
 
     # Sorteo primer jugador
@@ -152,7 +154,6 @@ while opcion.lower() != "x":
             victorias_seguidas = 0
 
     # Proceso general
-    print("\n...Fin de la partida...")
 
     # Calcular ganador total
     ganador, ganador_mayor_aciertos = encontrar_ganador(puntaje_total_1, puntaje_total_2,
@@ -164,21 +165,13 @@ while opcion.lower() != "x":
     puntaje_promedio_2 = calcular_promedio(puntaje_total_2, jugadas_totales)
     porcentaje_aciertos_2 = calcular_porcentaje(aciertos_2, jugadas_totales)
 
-    # Imprimir resultados y estadisticas: de todo!
-    # LO DEJO A MANO:
-    """
-    La cantidad de jugadas realizadas (recordando que una jugada consiste en los turnos de ambos jugadores).
-    Si hubo al menos una jugada con puntaje empatado entre ambos jugadores.
-    El puntaje promedio obtenido por jugada por cada jugador.
-    El porcentaje de aciertos para cada jugador
-    (considerando acierto si la suma de los dados coincidió con la apuesta apostada).
-    Indicar también si el ganador es el que tuvo mayor porcentaje de aciertos.
-    Si algún jugador ganó en al menos 3 turnos seguidos.
+    print_resultados_finales(ganador, ganador_mayor_aciertos, nombre_jugador_1, nombre_jugador_2,
+                             jugadas_totales, jugadas_empatadas, tres_al_hilo,
+                             puntaje_promedio_1, puntaje_promedio_2, porcentaje_aciertos_1, porcentaje_aciertos_2)
 
-    """
-    # Considerar crear la función print_resultados_finales()
-
+    # reinicia el loop el juego
     opcion = input("Prsione \"Enter\" para volver a jugar. Ingrese \"X\" para salir.")
+
 # Mensaje de salida
 print("Gracias por jugar! Nos vemos!")
 
