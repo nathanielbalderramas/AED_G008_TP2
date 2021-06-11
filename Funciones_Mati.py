@@ -32,3 +32,30 @@ def cargar_entero_con_tope_minimo(tope_minimo, mensaje=None):
         print("El valor ingresado no es válido")
         x = int(input("Ingrese un número mayor a " + str(tope_minimo) + ": "))
     return x
+<<<<<<< HEAD
+=======
+
+
+# prueba = cargar_entero_con_tope_minimo(10, "Para continuar deberá ingresar el puntaje máximo necesario para que la partida finalice.")
+
+def solicitar_apuesta(quien=""):
+    apuesta = input(quien + ": ¿Apuesta por par? (s/n): ")
+    while apuesta.lower() != "s" and apuesta.lower() != "n":
+        apuesta = input("Para responder solo debe ingresar s para SÍ o n para NO: ")
+    if apuesta == "s":
+        par = True
+    else:
+        par = False
+    return par
+
+
+def check_acierto_critico(tupla_int):
+    """Entrada: (int, int, int) | Salida: bool"""
+    iguales = False
+    r = 0
+    for d in tupla_int:
+        r += d % 2
+    if r == 0 or r == len(dados):
+        iguales = True
+    return iguales
+>>>>>>> 82163f9887b501cc23ff47fd3a17674e0809f744
