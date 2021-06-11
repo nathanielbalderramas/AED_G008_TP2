@@ -39,7 +39,7 @@ Por último, se pide elaborar y mostrar las siguientes estadísticas:
 
 """
 import random
-import funciones_auxiliares
+from .funciones_auxiliares import *
 
 # Entradas:
 puntaje_objetivo: int
@@ -69,13 +69,14 @@ apuesta_jugador_2: int  # o bool?
 
 
 
-opcion = None
+print("Bienvenido! Presione \"enter\" para jugar. Ingrese X para salir")
+opcion = input()
 while opcion.lower() != "x":
-    print("Bienvenido! Presione \"enter\" para jugar. Ingrese X para salir")
-    opcion = input()
     #Inicia el juego, solicita nombres y puntaje objetivo
+    nombre_jugador_a, nombre_jugador_b = None, None
     while nombre_jugador_a == nombre_jugador_b:
         "A continuación, se les solicitara sus nombres"
+        # avisar a quien le pide el nombre
         nombre_jugador_a = solicitar_nombre()
         nombre_jugador_b = solicitar_nombre()
         if nombre_jugador_a == nombre_jugador_b:

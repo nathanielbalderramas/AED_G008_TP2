@@ -4,7 +4,9 @@ def solicitar_nombre(quien=""):
     """Entradas: -- | Salidas: str"""
     if quien != "":
         quien += " "
-    nombre = input(quien + "Ingrese su nombre: ")
+    nombre = ""
+    while nombre == "":
+        nombre = input(quien + "Ingrese su nombre por favor: ")
     return nombre
 
 
@@ -27,10 +29,21 @@ def solicitar_puntaje_objetivo():
     return x
 
 
-def solicitar_apuesta():
-    """Entradas: -- | Salidas: bool"""
+def solicitar_apuesta(mensaje_previo=None):
+    """Entradas: str | Salidas: bool"""
     # par es True, impar es False
-    pass
+    apuesta = None
+    if mensaje_previo:
+        print(mensaje_previo)
+    while (apuesta != "s" and apuesta != "n"):
+        print("Debe apostar por resultado par o impar.")
+        apuesta = input("¿Desea apostar por par? (s/n)\n")
+        apuesta = apuesta.lower()
+
+    if apuesta == "s":
+        return True
+    else:
+        return False
 
 
 def tirar_dados():
@@ -38,7 +51,7 @@ def tirar_dados():
     dado1 = random.randint(1, 6)
     dado2 = random.randint(1, 6)
     dado3 = random.randint(1, 6)
-    return (dado1, dado2, dado3)
+    return dado1, dado2, dado3
 
 
 def calcular_puntaje(dados, apuesta):
@@ -57,6 +70,12 @@ def print_resultados_parciales(nombre_jugador_1, nombre_jugador_2, puntaje_total
     """Entradas: str, str, int, int, int | Salidas: --"""
     pass
 
+def es_par(num):
+    # devuelve True si es par
+    if num % 2 == 0:
+        return True
+    else:
+        return False
 
 def check_acierto(dados, apuesta):
     acierto = False
@@ -69,7 +88,12 @@ def check_acierto(dados, apuesta):
 
 def check_acierto_critico(dados, apuesta):
     """Entrada: (int, int, int), bool | Salida: bool"""
-    pass
+    d1, d2, d3 = dados
+    if es_par(d1) == apuesta and es_par(d2) == apuesta and es_par(d3) == apuesta:
+        acierto_critico = True
+    else:
+        acierto_critico = False
+    return acierto_critico
 
 
 def jugada(nombre):
@@ -94,16 +118,18 @@ def jugada(nombre):
     print(msj)
     return puntaje, acierto
 
-
+# puntaje_promedio_1 = calcular_promedio(puntaje_total_1, jugadas_totales)
 def calcular_promedio(acumulador, contador):
     """Entradas: int, int | Salidas: float"""
-    pass
+    promedio = acumulador / contador
+    return promedio
 
-
-def calcular_porcentaje(x, total):
+# porcentaje_aciertos_1 = calcular_porcentaje(aciertos_1, jugadas_totales)
+def calcular_porcentaje(num, total):
     """Entradas: int, int | Salidas: float"""
     # Recomendaría que el float sea redondeado a 1
-    pass
+    porcentaje = (num / total) * 100
+    return porcentaje
 
 
 def encontrar_ganador(puntaje_1, puntaje_2, victorias_1, victorias_2):
