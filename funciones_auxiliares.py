@@ -66,9 +66,16 @@ def calcular_puntaje(dados, apuesta):
     return puntaje
 
 
-def print_resultados_parciales(nombre_jugador_1, nombre_jugador_2, puntaje_total_1, puntaje_total_2, jugadas_totales):
+def print_resultados_parciales(nombre_jugador_1, nombre_jugador_2, puntaje_jugada_1, puntaje_jugada_2,
+                               puntaje_total_1, puntaje_total_2, jugadas_totales):
     """Entradas: str, str, int, int, int | Salidas: --"""
-    pass
+    msj = "-"*60 + "\n"
+    msj += "Resultados de la jugada N° {}:\n".format(jugadas_totales)
+    msj += "Nombre\t\t| Puntaje\t| Acumulado\n"
+    msj += "{}\t\t| {:3d}\t\t| {:3d}\n".format(nombre_jugador_1, puntaje_jugada_1, puntaje_total_1)
+    msj += "{}\t\t| {:3d}\t\t| {:3d}".format(nombre_jugador_2, puntaje_jugada_2, puntaje_total_2)
+    print(msj)
+
 
 def es_par(num):
     # devuelve True si es par
@@ -76,6 +83,7 @@ def es_par(num):
         return True
     else:
         return False
+
 
 def check_acierto(dados, apuesta):
     acierto = False
@@ -98,10 +106,13 @@ def check_acierto_critico(dados, apuesta):
 
 def jugada(nombre):
     """Entrada: str | Salida: (int, bool)"""
-    print("Turno de {}\nExitos!\n".format(nombre))
+    print("Turno de {}\nExitos!".format(nombre))
     apuesta = solicitar_apuesta()
+    input("Presione enter para lanzar los dados...")
+    print("...\n*Ruido de dados...* [USE SU IMAGINACIÓN >:| ]\n...")
     dados = tirar_dados()
     print("Tus dados son: {}, {}, {}".format(*dados))
+    input()
     acierto = check_acierto(dados, apuesta)
     puntaje = calcular_puntaje(dados, apuesta)
     msj = "Tu puntaje para esta jugada es de: {}\n".format(puntaje)
@@ -115,7 +126,7 @@ def jugada(nombre):
         msj += "Nada mal :)"
     else:
         puntaje += "¡Maravillosa jugada! O_O"
-    print(msj)
+    print(msj+"\n")
     return puntaje, acierto
 
 # puntaje_promedio_1 = calcular_promedio(puntaje_total_1, jugadas_totales)

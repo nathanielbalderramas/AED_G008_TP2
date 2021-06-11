@@ -38,8 +38,7 @@ Por último, se pide elaborar y mostrar las siguientes estadísticas:
     Si algún jugador ganó en al menos 3 turnos seguidos.
 
 """
-import random
-from .funciones_auxiliares import *
+from AED_G008_TP2.funciones_auxiliares import *
 
 # Entradas:
 puntaje_objetivo: int
@@ -77,13 +76,14 @@ while opcion.lower() != "x":
     while nombre_jugador_a == nombre_jugador_b:
         "A continuación, se les solicitara sus nombres"
         # avisar a quien le pide el nombre
-        nombre_jugador_a = solicitar_nombre()
-        nombre_jugador_b = solicitar_nombre()
+        nombre_jugador_a = solicitar_nombre("Primer Jugador")
+        nombre_jugador_b = solicitar_nombre("Segundo Jugador")
         if nombre_jugador_a == nombre_jugador_b:
             print("Advertencia: Si ud se llama igual que su rival, puede dirigirse al Registro Civil mas cercano para cambiarse el nombre, o directamente ingresar aquí un nombre diferente")
     puntaje_objetivo = solicitar_puntaje_objetivo()
 
     # Sorteo primer jugador
+    print("\n" + "-" * 60)
     print("Ahora vamos a sortear quien empieza...")
     print("... ♫ redoble de tambores ♫ ...")
     nombres = [nombre_jugador_a, nombre_jugador_b]
@@ -91,7 +91,7 @@ while opcion.lower() != "x":
     nombres.remove(nombre_jugador_1)
     nombre_jugador_2 = nombres[0]
     print("¡Comienza {}!".format(nombre_jugador_1))
-
+    print("-" * 60 + "\n")
 
     #Inicializar contadores, acumuladores y banderas
     jugadas_totales: int = 0
@@ -111,8 +111,9 @@ while opcion.lower() != "x":
     ganador_jugada_actual = None
     ganador_jugada_anterior = None
 
-    while (puntaje_total_1 < puntaje_objetivo and puntaje_total_2 < puntaje_objetivo):
-        ganador_jugada_anterior = ganador_jugada_actual # ver si dejar acá o al fondo. Es lo mismo
+    while puntaje_total_1 < puntaje_objetivo and puntaje_total_2 < puntaje_objetivo:
+        ganador_jugada_anterior = ganador_jugada_actual  # ver si dejar acá o al fondo. Es lo mismo.
+        jugadas_totales += 1
 
         # Turno jugador 1
         puntaje_jugada_1, acierto_jugada_1 = jugada(nombre_jugador_1)
@@ -127,17 +128,20 @@ while opcion.lower() != "x":
             aciertos_2 += 1
 
         # Proceso general
+        print_resultados_parciales(nombre_jugador_1, nombre_jugador_2, puntaje_jugada_1, puntaje_jugada_2,
+                                   puntaje_total_1, puntaje_total_2, jugadas_totales)
 
         # calcular ganador_jugada_actual, actualizar jugadas_ganadas_1, jugadas_ganadas_2 y jugadas_empatadas
         if puntaje_jugada_1 > puntaje_jugada_2:
             jugadas_ganadas_1 += 1
-            print("En esta ronda la victoria es de {}!".format(nombre_jugador_1))
+            print("En esta jugada la victoria es de {}!".format(nombre_jugador_1))
         elif puntaje_jugada_2 > puntaje_jugada_1:
             jugadas_ganadas_2 += 1
-            print("En esta ronda la victoria es de {}!".format(nombre_jugador_2))
+            print("En esta jugada la victoria es de {}!".format(nombre_jugador_2))
         else:
             jugadas_empatadas = True
             print("El resultado de la ronda es un empate!")
+        print("-"*60 + "\n")
 
         # actualizar tres_al_hilo ¿hacer función para esto?
         if ganador_jugada_actual == ganador_jugada_anterior:
@@ -146,12 +150,6 @@ while opcion.lower() != "x":
                 tres_al_hilo = True
         else:
             victorias_seguidas = 0
-
-        jugadas_totales += 1
-
-        print_resultados_parciales(nombre_jugador_1, nombre_jugador_2,
-                                   puntaje_total_1, puntaje_total_2,
-                                   jugadas_totales)
 
     # Proceso general
     print("\n...Fin de la partida...")
@@ -180,7 +178,7 @@ while opcion.lower() != "x":
     """
     # Considerar crear la función print_resultados_finales()
 
-
+    opcion = input("Prsione \"Enter\" para volver a jugar. Ingrese \"X\" para salir.")
 # Mensaje de salida
 print("Gracias por jugar! Nos vemos!")
 
