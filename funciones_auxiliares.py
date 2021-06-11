@@ -181,7 +181,7 @@ def print_resultados_finales(ganador, ganador_mayor_aciertos, nombre_jugador_1, 
     if tres_al_hilo:
         tres_al_hilo = "SI"
     else:
-        jugadas_empatadas = "NO"
+        tres_al_hilo = "NO"
 
     # Imprimir resultados y estadisticas: de todo!
     print("\n" + "=" * 60)
