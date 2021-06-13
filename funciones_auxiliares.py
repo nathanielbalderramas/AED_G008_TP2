@@ -1,5 +1,6 @@
 import random
 
+
 def solicitar_nombre(quien=""):
     """Entradas: -- | Salidas: str"""
     if quien != "":
@@ -35,7 +36,7 @@ def solicitar_apuesta(mensaje_previo=None):
     apuesta = None
     if mensaje_previo:
         print(mensaje_previo)
-    while (apuesta != "s" and apuesta != "n"):
+    while apuesta != "s" and apuesta != "n":
         print("Debe apostar por resultado par o impar.")
         apuesta = input("¿Desea apostar por par? (s/n)\n")
         apuesta = apuesta.lower()
@@ -71,9 +72,9 @@ def print_resultados_parciales(nombre_jugador_1, nombre_jugador_2, puntaje_jugad
     """Entradas: str, str, int, int, int | Salidas: --"""
     msj = "-"*60 + "\n"
     msj += "Resultados de la jugada N° {}:\n".format(jugadas_totales)
-    msj += "Nombre\t\t| Puntaje\t| Acumulado\n"
-    msj += "{}\t\t| {:3d}\t\t| {:3d}\n".format(nombre_jugador_1, puntaje_jugada_1, puntaje_total_1)
-    msj += "{}\t\t| {:3d}\t\t| {:3d}".format(nombre_jugador_2, puntaje_jugada_2, puntaje_total_2)
+    msj += "Nombre".center(20) + "| Puntaje\t| Acumulado\n"
+    msj += "{}".format(nombre_jugador_1).center(20) + "| {:3d}\t\t| {:3d}\n".format(puntaje_jugada_1, puntaje_total_1)
+    msj += "{}".format(nombre_jugador_2).center(20) + "| {:3d}\t\t| {:3d}\n".format(puntaje_jugada_2, puntaje_total_2)
     print(msj)
 
 
@@ -111,8 +112,8 @@ def jugada(nombre):
     input("Presione enter para lanzar los dados...")
     print("...\n*Ruido de dados...* [USE SU IMAGINACIÓN >:| ]\n...")
     dados = tirar_dados()
-    print("Tus dados son: {}, {}, {}".format(*dados))
-    input()
+    print("Tus dados son: [{}] [{}] [{}]".format(*dados))
+    input()  # Pausa para el jugador
     acierto = check_acierto(dados, apuesta)
     puntaje = calcular_puntaje(dados, apuesta)
     msj = "Tu puntaje para esta jugada es de: {}\n".format(puntaje)
@@ -129,18 +130,20 @@ def jugada(nombre):
     print(msj+"\n")
     return puntaje, acierto
 
+
 # puntaje_promedio_1 = calcular_promedio(puntaje_total_1, jugadas_totales)
 def calcular_promedio(acumulador, contador):
     """Entradas: int, int | Salidas: float"""
     promedio = acumulador / contador
-    return promedio
+    return round(promedio, 2)
+
 
 # porcentaje_aciertos_1 = calcular_porcentaje(aciertos_1, jugadas_totales)
 def calcular_porcentaje(num, total):
     """Entradas: int, int | Salidas: float"""
     # Recomendaría que el float sea redondeado a 1
     porcentaje = (num / total) * 100
-    return porcentaje
+    return round(porcentaje, 2)
 
 
 def encontrar_ganador(puntaje_1, puntaje_2, victorias_1, victorias_2):
@@ -213,4 +216,3 @@ def print_resultados_finales(ganador, ganador_mayor_aciertos, nombre_jugador_1, 
     print("Jugadas empatadas: {}".format(jugadas_empatadas))
     print("Tres Al Hilo: {}".format(tres_al_hilo))
     print("-" * 60 + "\n")
-

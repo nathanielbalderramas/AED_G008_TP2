@@ -39,6 +39,7 @@ Por último, se pide elaborar y mostrar las siguientes estadísticas:
 
 """
 from funciones_auxiliares import *
+import random
 
 # Entradas:
 puntaje_objetivo: int
@@ -86,6 +87,7 @@ while opcion.lower() != "x":
     print("\n" + "-" * 60)
     print("Ahora vamos a sortear quien empieza...")
     print("... ♫ redoble de tambores ♫ ...")
+    input()  # Pausa para el jugador
     nombres = [nombre_jugador_a, nombre_jugador_b]
     nombre_jugador_1 = random.choice(nombres)
     nombres.remove(nombre_jugador_1)
