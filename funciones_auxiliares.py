@@ -71,10 +71,12 @@ def print_resultados_parciales(nombre_jugador_1, nombre_jugador_2, puntaje_jugad
                                puntaje_total_1, puntaje_total_2, jugadas_totales):
     """Entradas: str, str, int, int, int | Salidas: --"""
     msj = "-"*60 + "\n"
-    msj += "Resultados de la jugada N° {}:\n".format(jugadas_totales)
-    msj += "Nombre".center(20) + "| Puntaje\t| Acumulado\n"
-    msj += "{}".format(nombre_jugador_1).center(20) + "| {:3d}\t\t| {:3d}\n".format(puntaje_jugada_1, puntaje_total_1)
-    msj += "{}".format(nombre_jugador_2).center(20) + "| {:3d}\t\t| {:3d}\n".format(puntaje_jugada_2, puntaje_total_2)
+    msj += "Puntajes de la jugada N° {}:\n".format(jugadas_totales)
+    msj += "Nombre".center(20) + "| Parcial | Acumulado \n"
+    msj += "{}".format(nombre_jugador_1).center(20)
+    msj += "|" + "{:3d}".format(puntaje_jugada_1).center(9) + "|" + "{:3d}".format(puntaje_total_1).center(11) + "\n"
+    msj += "{}".format(nombre_jugador_2).center(20)
+    msj += "|" + "{:3d}".format(puntaje_jugada_2).center(9) + "|" + "{:3d}".format(puntaje_total_2).center(11)
     print(msj)
 
 

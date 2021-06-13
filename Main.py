@@ -108,6 +108,7 @@ while opcion.lower() != "x":
 
     jugadas_empatadas: bool = False
     tres_al_hilo: bool = False
+    match_point: bool = False
 
     victorias_seguidas = 0
     ganador_jugada_actual = None
@@ -122,6 +123,12 @@ while opcion.lower() != "x":
         puntaje_total_1 += puntaje_jugada_1
         if acierto_jugada_1:
             aciertos_1 += 1
+
+        # check match_point
+        if puntaje_total_1 >= puntaje_objetivo:
+            print("\n{} ya llegó al puntaje objetivo.".format(nombre_jugador_1))
+            print("Esta es tu última oportunidad para derrotar a tu rival!\n")
+            input()
 
         # Turno jugador 2
         puntaje_jugada_2, acierto_jugada_2 = jugada(nombre_jugador_2)

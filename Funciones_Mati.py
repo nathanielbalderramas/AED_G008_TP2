@@ -32,8 +32,6 @@ def cargar_entero_con_tope_minimo(tope_minimo, mensaje=None):
         print("El valor ingresado no es válido")
         x = int(input("Ingrese un número mayor a " + str(tope_minimo) + ": "))
     return x
-<<<<<<< HEAD
-=======
 
 
 # prueba = cargar_entero_con_tope_minimo(10, "Para continuar deberá ingresar el puntaje máximo necesario para que la partida finalice.")
@@ -55,7 +53,7 @@ def check_acierto_critico(tupla_int):
     r = 0
     for d in tupla_int:
         r += d % 2
-    if r == 0 or r == len(dados):
+    if r == 0 or r == len(tupla_int):
         iguales = True
     return iguales
->>>>>>> 82163f9887b501cc23ff47fd3a17674e0809f744
+
