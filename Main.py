@@ -38,7 +38,7 @@ Por último, se pide elaborar y mostrar las siguientes estadísticas:
     Si algún jugador ganó en al menos 3 turnos seguidos.
 
 """
-from AED_G008_TP2.funciones_auxiliares import *
+from funciones_auxiliares import *
 
 # Entradas:
 puntaje_objetivo: int
@@ -64,8 +64,6 @@ apuesta_jugador_2: int  # o bool?
 # -- -- informe puntaje parcial
 # -- proceso de calculo final
 # -- salida por pantalla de resultados
-
-
 
 
 print("Bienvenido! Presione \"enter\" para jugar. Ingrese X para salir")
@@ -95,7 +93,7 @@ while opcion.lower() != "x":
     print("¡Comienza {}!".format(nombre_jugador_1))
     print("-" * 60 + "\n")
 
-    #Inicializar contadores, acumuladores y banderas
+    # Inicializar contadores, acumuladores y banderas
     jugadas_totales: int = 0
     jugadas_ganadas_1: int = 0
     jugadas_ganadas_2: int = 0
@@ -174,4 +172,3 @@ while opcion.lower() != "x":
 
 # Mensaje de salida
 print("Gracias por jugar! Nos vemos!")
-

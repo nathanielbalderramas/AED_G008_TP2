@@ -24,6 +24,17 @@ class TestFunciones(unittest.TestCase):
         self.assertEqual(f.check_acierto_critico((3, 3, 3), True), False)
         self.assertEqual(f.check_acierto_critico((3, 3, 3), False), True)
 
+    def test_calcular_promedio(self):
+        self.assertEqual(f.calcular_promedio(20, 4), 5)
+        self.assertEqual(f.calcular_promedio(30, 4), (30/4))
+        self.assertEqual(f.calcular_promedio(20, 2), 10)
+
+    def test_calcular_porcentaje(self):
+        self.assertEqual(f.calcular_porcentaje(4, 10), 40.0)
+        self.assertEqual(f.calcular_porcentaje(7, 12), round(7/12, 1))
+        self.assertEqual(f.calcular_porcentaje(6, 20), 30.0)
+
+
 
 if __name__ == "__main__":
     unittest.main()
